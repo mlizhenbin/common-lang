@@ -2,11 +2,11 @@
  * okhqb.com.
  * Copyright (c) 2009-2013 All Rights Reserved.
  */
-package com.okhqb.security.sign.impl;
+package cn.lzb.common.sign.impl;
 
-import com.okhqb.security.sign.SignKeyLoader;
-import com.okhqb.security.sign.Signature;
-import com.okhqb.security.sign.util.KeyEnum;
+import cn.lzb.common.sign.SignKeyLoader;
+import cn.lzb.common.sign.Signature;
+import cn.lzb.common.sign.util.KeyEnum;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.UnsupportedEncodingException;

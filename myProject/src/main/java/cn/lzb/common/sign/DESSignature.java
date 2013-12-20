@@ -1,4 +1,4 @@
-package com.okhqb.security.sign;
+package cn.lzb.common.sign;
 
 /**
  * 功能描述： 对称加密算法DES加密解密接口

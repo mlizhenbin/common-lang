@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sql name="sqlTest">
+    <!-- 查询sql语句模板 -->
+    <select id="findAllSalesOrders">
+        <![CDATA[
+			select
+			    order_no, payment, buyer_name, create_time, modify_time
+			from
+			    is_sales_order
+		]]>
+    </select>
+
+    <!-- 插入sql语句模板 -->
+    <insert id="addSalesOrder">
+        <![CDATA[
+			insert into is_sales_order(order_no, payment, buyer_name, createTime, modify_time)
+			values(#orderNo#, #payment#, #buyerName#, #createTime#, #modifyTime#)
+		]]>
+    </insert>
+
+    <!-- 更新sql语句模板 -->
+    <update id="updateSalesOrder">
+        <![CDATA[
+			update
+			    is_sales_order
+			set
+			    payment = #payment#,
+				buyer_name = #buyerName#,
+				modify_time = #modifyTime#
+			where order_no = #orderNo#
+		]]>
+    </update>
+
+</sql>

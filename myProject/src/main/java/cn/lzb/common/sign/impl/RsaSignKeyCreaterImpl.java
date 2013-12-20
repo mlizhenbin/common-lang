@@ -1,4 +1,4 @@
-package com.okhqb.security.sign.impl;
+package cn.lzb.common.sign.impl;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -8,11 +8,10 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.lzb.common.sign.RsaSignKeyCreater;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.okhqb.security.sign.RsaSignKeyCreater;
 
 /**
  * 功能描述： 获取RSA加密方式公钥与私钥
@@ -30,7 +29,6 @@ public class RsaSignKeyCreaterImpl implements RsaSignKeyCreater {
     private static final String SIGN_TYPE = "RSA";
 
     /**
-     * @see com.okhqb.security.sign.RsaSignKeyCreater#getRsaSignKey()
      */
     public List<String> getRsaSignKey() throws Exception {
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(SIGN_TYPE);

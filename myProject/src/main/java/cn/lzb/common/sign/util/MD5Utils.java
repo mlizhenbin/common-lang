@@ -2,7 +2,7 @@
  * okhqb.com.
  * Copyright (c) 2009-2013 All Rights Reserved.
  */
-package com.okhqb.security.sign.util;
+package cn.lzb.common.sign.util;
 
 import org.apache.commons.lang.StringUtils;
 

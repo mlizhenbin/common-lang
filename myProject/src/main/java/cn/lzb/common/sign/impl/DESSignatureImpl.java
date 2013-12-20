@@ -1,9 +1,9 @@
-package com.okhqb.security.sign.impl;
+package cn.lzb.common.sign.impl;
 
-import com.okhqb.security.sign.DESSignature;
-import com.okhqb.security.sign.SignKeyLoader;
-import com.okhqb.security.sign.util.DESUtils;
-import com.okhqb.security.sign.util.KeyEnum;
+import cn.lzb.common.sign.DESSignature;
+import cn.lzb.common.sign.SignKeyLoader;
+import cn.lzb.common.sign.util.DESUtils;
+import cn.lzb.common.sign.util.KeyEnum;
 
 import java.nio.charset.Charset;
 

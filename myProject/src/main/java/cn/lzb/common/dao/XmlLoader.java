@@ -2,16 +2,18 @@ package cn.lzb.common.dao;
 
 import cn.lzb.common.lang.CollectionUtil;
 import cn.lzb.common.lang.StringUtil;
+
 import com.google.common.collect.Maps;
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
+
+import org.apache.poi.util.IOUtils;
+import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,15 +42,20 @@ public class XmlLoader {
 
         // 使用SAX方式解析
         SAXReader reader = new SAXReader();
+
         // 读取XML文件
-        InputStream in = XmlLoader.class.getClassLoader().getResourceAsStream(xmlPath);
+        URL url = XmlLoader.class.getClassLoader().getResource("SqlTest.xml");
+
         // 获取XML对象
         Document doc;
+        InputStream in = null;
         try {
+            in = new FileInputStream(url.getFile());
             doc = reader.read(in);
-        } catch (DocumentException e) {
-            LOGGER.error("读取XML文件异常， xmlPath=" + xmlPath);
-            return new HashMap<String, String>(0);
+        } catch (Exception e) {
+            throw new RuntimeException("加载SqlTest.xml配置文件出现异常", e);
+        } finally {
+            IOUtils.closeQuietly(in);
         }
         Element root = doc.getRootElement();
 
@@ -61,7 +68,7 @@ public class XmlLoader {
                 String nodeValue = xmlAddNodes.get(nodeKey);
                 if (StringUtil.isNotBlank(nodeKey) && StringUtil.isNotBlank(nodeValue)) {
 
-                    Element node;
+                    Node node;
                     StringBuffer nodeSqlBuffer = new StringBuffer();
                     if (nodeKey.equals(SQLOperatorEnum.SELECT.getCode())) {
                         nodeSqlBuffer.append("//").append(SQLOperatorEnum.SELECT.getCode())
@@ -76,7 +83,7 @@ public class XmlLoader {
                         nodeSqlBuffer.append("//").append(SQLOperatorEnum.DELETE.getCode())
                                 .append("[@id='").append(nodeValue).append("']");
                     }
-                    node = (Element) root.selectSingleNode(nodeSqlBuffer.toString());
+                    node = root.selectSingleNode(nodeSqlBuffer.toString());
                     xmlSQLs.put(nodeValue, node.getText());
                 }
             }

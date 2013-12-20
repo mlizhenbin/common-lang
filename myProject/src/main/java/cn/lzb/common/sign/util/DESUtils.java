@@ -1,6 +1,6 @@
-package com.okhqb.security.sign.util;
+package cn.lzb.common.sign.util;
 
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
@@ -167,6 +167,19 @@ public class DESUtils {
      * @return
      */
     public static String getBytesStr(byte[] data) {
-        return new BASE64Encoder().encode(data);
+        return new Base64().encodeToString(data);
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        byte[] key = initSecretKey("110818092356110818092356");
+        String data = "http://www.okhqb.com";
+        byte[] encrypt = encrypt(data.getBytes(), key);
+        System.out.println("加密后密文=" + getBytesStr(encrypt));
+
+        byte[] decrypt = decrypt(encrypt, key);
+        System.out.println(new String(decrypt));
+
+
     }
 }

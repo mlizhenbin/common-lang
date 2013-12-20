@@ -2,11 +2,11 @@
  * okhqb.com.
  * Copyright (c) 2009-2013 All Rights Reserved.
  */
-package com.okhqb.security.sign;
+package cn.lzb.common.sign;
+
+import cn.lzb.common.sign.util.KeyEnum;
 
 import java.security.SignatureException;
-
-import com.okhqb.security.sign.util.KeyEnum;
 
 /**
  * 

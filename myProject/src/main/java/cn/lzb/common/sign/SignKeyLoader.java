@@ -2,9 +2,10 @@
  * okhqb.com.
  * Copyright (c) 2009-2013 All Rights Reserved.
  */
-package com.okhqb.security.sign;
+package cn.lzb.common.sign;
 
-import com.okhqb.security.sign.util.KeyEnum;
+
+import cn.lzb.common.sign.util.KeyEnum;
 
 /**
  * 密钥加载器

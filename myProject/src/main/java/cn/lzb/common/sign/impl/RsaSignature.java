@@ -1,8 +1,4 @@
-/**
- * okhqb.com.
- * Copyright (c) 2009-2013 All Rights Reserved.
- */
-package com.okhqb.security.sign.impl;
+package cn.lzb.common.sign.impl;
 
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -11,6 +7,7 @@ import java.security.SignatureException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+import cn.lzb.common.sign.impl.AbstractSignature;
 import org.apache.commons.codec.binary.Base64;
 
 /**

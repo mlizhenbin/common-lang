@@ -1,4 +1,4 @@
-package com.okhqb.security.sign;
+package cn.lzb.common.sign;
 
 import java.util.List;
 

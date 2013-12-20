@@ -1,5 +1,6 @@
 package cn.lzb.common.lang;
 
+import cn.lzb.common.common.ElementsMethod;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -161,7 +162,7 @@ public class ListConvertAdapter<T, V> {
      * @param v
      * @return
      */
-    public Object getReflectValue(V v) {
+    protected Object getReflectValue(V v) {
 
         Class<?> clazz = v.getClass();
         // 查询属性在类中存不存在
@@ -260,50 +261,6 @@ public class ListConvertAdapter<T, V> {
         public static final String skuId = "skuId";
         public static final String skuName = "skuName";
         public static final String orderNo = "orderNo";
-    }
-
-    /**
-     * 类属性方法Head枚举
-     */
-    protected enum ElementsMethod {
-
-        /**
-         * get方法
-         */
-        GET("get"),
-
-        /**
-         * boolean方法
-         */
-        IS("is"),
-
-        /**
-         * set方法
-         */
-        SET("set");
-
-        /**
-         * 方法头参数
-         */
-        private String methodHeadCode;
-
-        /**
-         * 构造方法
-         *
-         * @param methodHeadCode
-         */
-        private ElementsMethod(String methodHeadCode) {
-            this.methodHeadCode = methodHeadCode;
-        }
-
-        /**
-         * 获取方法Head枚举
-         *
-         * @return
-         */
-        private String getMethodHeadCode() {
-            return methodHeadCode;
-        }
     }
 }
 
