@@ -1,14 +1,14 @@
 package cn.lzb.common.common;
 
 /**
- * 功能描述：
+ * 功能描述：类get/set方法Head名称
  *
  * @author: Zhenbin.Li
  * email： zhenbin.li@okhqb.com
  * company：华强北在线
  * Date: 13-12-8 Time：下午1:21
  */
-public enum ElementsMethod {
+public enum ClassPropertyMethodHead {
 
     /**
      * get方法
@@ -35,7 +35,7 @@ public enum ElementsMethod {
      *
      * @param methodHeadCode
      */
-    private ElementsMethod(String methodHeadCode) {
+    private ClassPropertyMethodHead(String methodHeadCode) {
         this.methodHeadCode = methodHeadCode;
     }
 

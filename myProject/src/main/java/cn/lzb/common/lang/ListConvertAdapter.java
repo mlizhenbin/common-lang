@@ -1,6 +1,6 @@
 package cn.lzb.common.lang;
 
-import cn.lzb.common.common.ElementsMethod;
+import cn.lzb.common.common.ClassPropertyMethodHead;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -186,7 +186,7 @@ public class ListConvertAdapter<T, V> {
 
         // 获取方法名称
         StringBuffer nameBuffer = new StringBuffer();
-        nameBuffer.append(ElementsMethod.GET.getMethodHeadCode()).append(propertyName);
+        nameBuffer.append(ClassPropertyMethodHead.GET.getMethodHeadCode()).append(propertyName);
 
         // 找出对应方法
         Method getPropertyNameMethod = null;
@@ -254,7 +254,7 @@ public class ListConvertAdapter<T, V> {
     /**
      * 常用获取数组常量，参数取值可以扩展
      */
-    protected interface PropertiesAware {
+    public interface PropertiesAware {
         public static final String id = "id";
         public static final String cid = "cid";
         public static final String spuId = "spuId";

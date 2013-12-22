@@ -10,6 +10,25 @@
 		]]>
     </select>
 
+    <select id="findSalesOrders">
+        <![CDATA[
+			select
+			    order_no, payment, buyer_name, create_time, modify_time
+			from
+			    is_sales_order
+		]]>
+    </select>
+
+    <select id="findSalesOrderByOrderNo">
+        <![CDATA[
+			select
+			    order_no, payment, buyer_name, create_time, modify_time
+			from
+			    is_sales_order
+			WHERE order_no = #orderNo#
+		]]>
+    </select>
+
     <!-- 插入sql语句模板 -->
     <insert id="addSalesOrder">
         <![CDATA[
@@ -20,6 +39,19 @@
 
     <!-- 更新sql语句模板 -->
     <update id="updateSalesOrder">
+        <![CDATA[
+			update
+			    is_sales_order
+			set
+			    payment = #payment#,
+				buyer_name = #buyerName#,
+				modify_time = #modifyTime#
+			where order_no = #orderNo#
+		]]>
+    </update>
+
+
+    <update id="updateSalesOrders">
         <![CDATA[
 			update
 			    is_sales_order

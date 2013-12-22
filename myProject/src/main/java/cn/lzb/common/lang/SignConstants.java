@@ -30,6 +30,9 @@ public interface SignConstants {
     /**  双引号 */
     String DOUBLE_QUOTE = "\"";
 
+    /**  单引号 */
+    String QUOTE = "'";
+
     /**  星号 */
     String ASTERISK = "*";
 
