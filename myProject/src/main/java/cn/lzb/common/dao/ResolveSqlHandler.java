@@ -1,6 +1,6 @@
 package cn.lzb.common.dao;
 
-import cn.lzb.common.common.ClassPropertyMethodHead;
+import cn.lzb.common.common.ClassMethodHeadType;
 import cn.lzb.common.lang.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -11,14 +11,14 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * 功能描述：读取XML文件配置SQL，并且自动赋值到SQL中工厂
+ * 功能描述：读取XML文件配置SQL，并且自动赋值到SQL中处理器
  *
  * @author: Zhenbin.Li
  * email： zhenbin.li@okhqb.com
  * company：华强北在线
  * Date: 13-12-6 Time：下午3:06
  */
-public class HandleSqlResolver {
+public class ResolveSqlHandler {
 
     /**
      * 读取配置XML文件
@@ -35,7 +35,7 @@ public class HandleSqlResolver {
      *
      * @param xmlPath XML文件路径
      */
-    public HandleSqlResolver(String xmlPath) {
+    public ResolveSqlHandler(String xmlPath) {
         xmlSQLs = xmlLoader.resolve(xmlPath);
     }
 
@@ -218,7 +218,7 @@ public class HandleSqlResolver {
 
         // 获取方法名称
         StringBuffer nameBuffer = new StringBuffer();
-        nameBuffer.append(ClassPropertyMethodHead.GET.getMethodHeadCode()).append(propertyName);
+        nameBuffer.append(ClassMethodHeadType.GET.getMethodHeadCode()).append(propertyName);
 
         // 找出对应方法
         Method getPropertyNameMethod = null;

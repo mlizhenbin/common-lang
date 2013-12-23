@@ -1,6 +1,6 @@
 package cn.lzb.common.excel;
 
-import cn.lzb.common.excel.impl.BaseExportExcelAdapter;
+import cn.lzb.common.excel.impl.BasicExportExcelAdapter;
 import cn.lzb.common.excel.impl.CommonExportExcelImpl;
 
 /**
@@ -20,7 +20,7 @@ public class BaseCreateTest {
 
     public static void main(String[] args) {
 
-        exportExcelFacade.export(new BaseExportExcelAdapter<Object>() {
+        exportExcelFacade.export(new BasicExportExcelAdapter<Object>() {
             @Override
             public void init(ExportExcelContext<Object> exportContext) {
                 // 初始化上下文

@@ -1,6 +1,6 @@
 package cn.lzb.common.lang;
 
-import cn.lzb.common.common.ClassPropertyMethodHead;
+import cn.lzb.common.common.ClassMethodHeadType;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -186,7 +186,7 @@ public class ListConvertAdapter<T, V> {
 
         // 获取方法名称
         StringBuffer nameBuffer = new StringBuffer();
-        nameBuffer.append(ClassPropertyMethodHead.GET.getMethodHeadCode()).append(propertyName);
+        nameBuffer.append(ClassMethodHeadType.GET.getMethodHeadCode()).append(propertyName);
 
         // 找出对应方法
         Method getPropertyNameMethod = null;

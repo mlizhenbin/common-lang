@@ -8,7 +8,7 @@ package cn.lzb.common.common;
  * company：华强北在线
  * Date: 13-12-8 Time：下午1:21
  */
-public enum ClassPropertyMethodHead {
+public enum ClassMethodHeadType {
 
     /**
      * get方法
@@ -35,7 +35,7 @@ public enum ClassPropertyMethodHead {
      *
      * @param methodHeadCode
      */
-    private ClassPropertyMethodHead(String methodHeadCode) {
+    private ClassMethodHeadType(String methodHeadCode) {
         this.methodHeadCode = methodHeadCode;
     }
 

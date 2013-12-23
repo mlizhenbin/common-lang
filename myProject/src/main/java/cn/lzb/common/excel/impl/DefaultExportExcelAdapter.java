@@ -15,7 +15,7 @@ import com.google.common.collect.Lists;
  * company：华强北在线
  * Date: 13-11-19 Time：下午12:44
  */
-public abstract class DefaultExportExcelAdapter<T> extends BaseExportExcelAdapter<T> {
+public abstract class DefaultExportExcelAdapter<T> extends BasicExportExcelAdapter<T> {
 
     /**
      * 生成Excel文件主体数据集合
