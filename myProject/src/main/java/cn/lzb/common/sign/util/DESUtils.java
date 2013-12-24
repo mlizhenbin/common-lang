@@ -170,6 +170,12 @@ public class DESUtils {
         return new Base64().encodeToString(data);
     }
 
+    /**
+     * 测试
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         byte[] key = initSecretKey("110818092356110818092356");
@@ -179,7 +185,5 @@ public class DESUtils {
 
         byte[] decrypt = decrypt(encrypt, key);
         System.out.println(new String(decrypt));
-
-
     }
 }

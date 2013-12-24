@@ -98,6 +98,6 @@ public class DESSignatureImpl implements DESSignature {
         for (int i = 0; i < keyStr.length(); i++) {
             desKeys[i] = Byte.valueOf(keyStr.charAt(i) + "");
         }
-        return desKeys;
+        return keyStr.getBytes();
     }
 }
