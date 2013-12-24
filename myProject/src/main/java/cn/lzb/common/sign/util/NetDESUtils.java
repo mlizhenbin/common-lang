@@ -176,7 +176,7 @@ public class NetDESUtils {
 
     public static void main(String[] args) throws Exception {
 
-        String key = MD5Utils.encode("zmhqb2013", "utf-8").substring(0, 8);
+        String key = MD5Utils.encode("testkey", "utf-8").substring(0, 8);
         System.out.println("密钥明文key=" + key);
 
         String value = "www.okhqb.com";
