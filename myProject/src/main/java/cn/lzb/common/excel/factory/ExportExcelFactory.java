@@ -35,7 +35,7 @@ public class ExportExcelFactory {
     /**
      * 当前行数
      */
-    private int currentRow = 0;
+    private int currentRow;
 
     /**
      * 总列数

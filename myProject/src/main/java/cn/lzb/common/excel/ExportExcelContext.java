@@ -1,5 +1,7 @@
 package cn.lzb.common.excel;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
@@ -163,5 +165,10 @@ public class ExportExcelContext<T> {
 
     public void setHttpServletResponse(HttpServletResponse httpServletResponse) {
         this.httpServletResponse = httpServletResponse;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

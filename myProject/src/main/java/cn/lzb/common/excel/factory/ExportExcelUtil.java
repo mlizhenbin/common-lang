@@ -23,11 +23,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExportExcelUtil {
 
     /**
+     * Don't let anyone instantiate this class.
+     */
+    private ExportExcelUtil() {
+    }
+
+    /**
      * 根据多行报表标题获得一个合并的行列信息
      *
      * @param colTitles 列标题
      * @return 报表标题合并的行列信息：第一维对应标题的行，第二维对应标题的列，
-     *         第三维对应标题的合并行和列，已经被合并的行或列则对应的第三维为null。
+     * 第三维对应标题的合并行和列，已经被合并的行或列则对应的第三维为null。
      */
     public static int[][][] getSpans(String[][] colTitles) {
 
@@ -96,7 +102,7 @@ public class ExportExcelUtil {
      * @param endCol   结束列（从0开始）
      */
     public static void mergeRegion(XSSFSheet sheet, int startRow, int startCol, int endRow, int endCol) {
-        sheet.addMergedRegion(new CellRangeAddress(startRow, endRow, startCol,  endCol));
+        sheet.addMergedRegion(new CellRangeAddress(startRow, endRow, startCol, endCol));
     }
 
     /**
