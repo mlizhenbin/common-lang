@@ -2,6 +2,8 @@ package cn.lzb.common.excel.factory;
 
 import cn.lzb.common.lang.CollectionUtil;
 import cn.lzb.common.lang.StringUtil;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.*;
 
@@ -75,18 +77,47 @@ public class ExportExcelFactory {
         XSSFFont font = ExportExcelUtil.getFont(workbook, 10, XSSFFont.BOLDWEIGHT_NORMAL, IndexedColors.BLACK.getIndex());
         XSSFCellStyle style = ExportExcelUtil.getStyle(workbook, font, XSSFCellStyle.ALIGN_CENTER);
 
+        // 记住合并单元格的位置
+        Map<Integer, Integer> mergeRegions = Maps.newHashMap();
         for (String[][] excel : list) {
-            int[][][] spans = ExportExcelUtil.getSpans(excel);
-            for (int i = 0; i < excel.length; i++) {
-                XSSFRow row = sheet.createRow(currentRow);
-                for (int j = 0; j < excel[i].length; j++) {
-                    ExportExcelUtil.createCell(row, j, style, excel[i][j]);
-                    if (excel[i][j] != null) {
-                        ExportExcelUtil.mergeRegion(
-                                sheet, currentRow, j, currentRow + spans[i][j][0] - 1, j + spans[i][j][1] - 1);
+            // 先写数组的第一条数据
+            XSSFRow firstRow = sheet.createRow(currentRow);
+            for (int j = 0; j < excel[0].length; j++) {
+                ExportExcelUtil.createCell(firstRow, j, style, excel[0][j]);
+            }
+            currentRow++;
+
+            // 验证二位数组长度是否大于2，如果大于，则合并不需要写的数据
+            // 行合并的长度长度为Excel表格的纬度
+            if (excel.length > 1) {
+                for (int i = 1; i < excel.length; i++) {
+                    XSSFRow row = sheet.createRow(currentRow);
+                    for (int j = 0; j < excel[i].length; j++) {
+                        ExportExcelUtil.createCell(row, j, style, excel[i][j]);
+                        // 为空的都记住，KEY：col，value：数组col空的数量
+                        if (excel[i][j] == null) {
+                            if (mergeRegions.get(j) == null) {
+                                mergeRegions.put(j, 1);
+                            } else {
+                                int num = mergeRegions.get(j) + 1;
+                                mergeRegions.put(j, num);
+                            }
+                        }
                     }
+                    currentRow++;
                 }
-                currentRow++;
+
+                // 可以合并单元格
+                if (CollectionUtil.isNotEmpty(mergeRegions)) {
+                    int mergeSize = excel.length - 1;
+                    for (int j = 0; j < excel[0].length; j++) {
+                        if (mergeRegions.containsKey(j) && (mergeRegions.get(j) == mergeSize)) {
+                            ExportExcelUtil.mergeRegion(sheet, currentRow - mergeRegions.get(j) - 1, j, currentRow - 1, j);
+                        }
+                    }
+                    //合并完成之后清掉map的值
+                    mergeRegions.clear();
+                }
             }
         }
     }
@@ -116,31 +147,70 @@ public class ExportExcelFactory {
         XSSFCellStyle style_green = ExportExcelUtil
                 .getStyle(workbook, font_green, XSSFCellStyle.ALIGN_CENTER);
 
+        // 记住合并单元格的位置
+        Map<Integer, Integer> mergeRegions = Maps.newHashMap();
         for (int index = 0; index < list.size(); index++) {
             String rowColor = color.get(index);
             String[][] excel = list.get(index);
-            int[][][] spans = ExportExcelUtil.getSpans(excel);
-            for (int i = 0; i < excel.length; i++) {
-                XSSFRow row = sheet.createRow(currentRow);
-                for (int j = 0; j < excel[i].length; j++) {
-                    if (rowColor != null) {
-                        if (rowColor.equals(ExportFrontColor.RED.getColorCode())) {
-                            ExportExcelUtil.createCell(row, j, style_red, excel[i][j]);
-                        } else if (rowColor.equals(ExportFrontColor.GREEN.getColorCode())) {
-                            ExportExcelUtil.createCell(row, j, style_green, excel[i][j]);
+            // 先写数组的第一条数据
+            XSSFRow firstRow = sheet.createRow(currentRow);
+            for (int j = 0; j < excel[0].length; j++) {
+                if (rowColor != null) {
+                    if (rowColor.equals(ExportFrontColor.RED.getColorCode())) {
+                        ExportExcelUtil.createCell(firstRow, j, style_red, excel[0][j]);
+                    } else if (rowColor.equals(ExportFrontColor.GREEN.getColorCode())) {
+                        ExportExcelUtil.createCell(firstRow, j, style_green, excel[0][j]);
+                    } else {
+                        ExportExcelUtil.createCell(firstRow, j, style_black, excel[0][j]);
+                    }
+                } else {
+                    ExportExcelUtil.createCell(firstRow, j, style_black, excel[0][j]);
+                }
+            }
+            currentRow++;
+
+            // 验证二位数组长度是否大于2，如果大于，则合并不需要写的数据
+            // 行合并的长度长度为Excel表格的纬度
+            if (excel.length > 1) {
+                for (int i = 1; i < excel.length; i++) {
+                    XSSFRow row = sheet.createRow(currentRow);
+                    for (int j = 0; j < excel[i].length; j++) {
+                        if (rowColor != null) {
+                            if (rowColor.equals(ExportFrontColor.RED.getColorCode())) {
+                                ExportExcelUtil.createCell(row, j, style_red, excel[i][j]);
+                            } else if (rowColor.equals(ExportFrontColor.GREEN.getColorCode())) {
+                                ExportExcelUtil.createCell(row, j, style_green, excel[i][j]);
+                            } else {
+                                ExportExcelUtil.createCell(row, j, style_black, excel[i][j]);
+                            }
                         } else {
                             ExportExcelUtil.createCell(row, j, style_black, excel[i][j]);
                         }
-                    } else {
-                        ExportExcelUtil.createCell(row, j, style_black, excel[i][j]);
-                    }
 
-                    if (excel[i][j] != null) {
-                        ExportExcelUtil.mergeRegion(
-                                sheet, currentRow, j, currentRow + spans[i][j][0] - 1, j + spans[i][j][1] - 1);
+                        // 为空的都记住，KEY：col，value：数组col空的数量
+                        if (excel[i][j] == null) {
+                            if (mergeRegions.get(j) == null) {
+                                mergeRegions.put(j, 1);
+                            } else {
+                                int num = mergeRegions.get(j) + 1;
+                                mergeRegions.put(j, num);
+                            }
+                        }
                     }
+                    currentRow++;
                 }
-                currentRow++;
+
+                // 可以合并单元格
+                if (CollectionUtil.isNotEmpty(mergeRegions)) {
+                    int mergeSize = excel.length - 1;
+                    for (int j = 0; j < excel[0].length; j++) {
+                        if (mergeRegions.containsKey(j) && (mergeRegions.get(j) == mergeSize)) {
+                            ExportExcelUtil.mergeRegion(sheet, currentRow - mergeRegions.get(j) - 1, j, currentRow - 1, j);
+                        }
+                    }
+                    //合并完成之后清掉map的值
+                    mergeRegions.clear();
+                }
             }
         }
     }
@@ -150,6 +220,7 @@ public class ExportExcelFactory {
      *
      * @param list List(String[])列表数据
      */
+
     public void createBody(List<String[]> list) {
 
         if (CollectionUtil.isEmpty(list)) {

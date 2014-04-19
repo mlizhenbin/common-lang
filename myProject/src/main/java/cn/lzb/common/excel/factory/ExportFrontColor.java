@@ -1,5 +1,7 @@
 package cn.lzb.common.excel.factory;
 
+import cn.lzb.common.lang.StringUtil;
+
 /**
  * 功能描述：生成Excel文件字体颜色，目前只支持红色与绿色
  *
@@ -25,5 +27,17 @@ public enum ExportFrontColor {
 
     public String getColorCode() {
         return colorCode;
+    }
+
+    public static ExportFrontColor getColor(String code) {
+        if (StringUtil.isBlank(code)) {
+            return null;
+        }
+        for (ExportFrontColor exportFrontColor : ExportFrontColor.values()) {
+            if (exportFrontColor.getColorCode().equals(code)) {
+                return exportFrontColor;
+            }
+        }
+        return null;
     }
 }
