@@ -48,7 +48,7 @@ public class MultipleCreateTest {
     private List<MultipleEntity> getMultipleEntities() {
 
         List<MultipleEntity> multipleEntities = Lists.newArrayList();
-        for (int i = 1; i < 6000; i++) {
+        for (int i = 1; i < 7000; i++) {
             MultipleEntity multipleEntity = new MultipleEntity();
             multipleEntity.setUserId(i);
             multipleEntity.setUserName("okhqb_" + i);

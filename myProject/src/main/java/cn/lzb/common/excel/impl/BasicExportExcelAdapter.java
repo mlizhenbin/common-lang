@@ -12,6 +12,8 @@ import cn.lzb.common.excel.factory.ExportExcelFactory;
 import cn.lzb.common.lang.ArrayUtil;
 import cn.lzb.common.lang.DateUtil;
 import cn.lzb.common.lang.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 功能描述：导出生成Excel文件基本Adapter
@@ -24,6 +26,12 @@ import cn.lzb.common.lang.StringUtil;
  * Date: 13-12-4 Time：上午11:05
  */
 public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> {
+
+    /**
+     * 打印cn.lzb.common.excel.impl.BasicExportExcelAdapter.java日志
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(BasicExportExcelAdapter.class);
+
 
     /**
      * 文件下载的header key
@@ -201,5 +209,25 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
     protected static void writeDownloadResHeader(String fileName, HttpServletResponse response) {
         response.addHeader(RESOURCE_HEADER_KEY, "attachment; filename=" + fileName);
         response.setContentType(RESOURCE_CONTENT_TYPE);
+    }
+
+    /**
+     * 打印系统时间
+     */
+    protected void printExecuteTime() {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(DateUtil.parseLongToDateString(System.currentTimeMillis()));
+        }
+    }
+
+    /**
+     * 打印系统时间
+     *
+     * @param info
+     */
+    protected void printExecuteTime(String info) {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(info + DateUtil.parseLongToDateString(System.currentTimeMillis()));
+        }
     }
 }
