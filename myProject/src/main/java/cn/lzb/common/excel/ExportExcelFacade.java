@@ -1,6 +1,6 @@
 package cn.lzb.common.excel;
 
-import cn.lzb.common.excel.impl.BaseExportExcelAdapter;
+import cn.lzb.common.excel.impl.BasicExportExcelAdapter;
 import cn.lzb.common.excel.impl.DefaultExportExcelAdapter;
 import cn.lzb.common.excel.impl.MultipartExportExcelAdapter;
 
@@ -47,6 +47,6 @@ public interface ExportExcelFacade {
      * @param adapter 创建Excel文件抽象实现
      * @param <T>     Excel文件对应对象
      */
-    public <T> void export(BaseExportExcelAdapter<? super T> adapter);
+    public <T> void export(BasicExportExcelAdapter<? super T> adapter);
 
 }

@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
  * company：华强北在线
  * Date: 13-12-4 Time：上午11:05
  */
-public abstract class BaseExportExcelAdapter<T> implements ExportExcelAware<T> {
+public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> {
 
     /**
      * 文件下载的header key
@@ -51,7 +51,7 @@ public abstract class BaseExportExcelAdapter<T> implements ExportExcelAware<T> {
     /**
      * 构造方法，初始化导出文件上线问
      */
-    public BaseExportExcelAdapter() {
+    public BasicExportExcelAdapter() {
         // 初始化上下文参数
         init(context);
         // 验证上下文参数

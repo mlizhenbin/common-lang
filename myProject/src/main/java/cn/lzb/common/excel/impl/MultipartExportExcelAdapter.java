@@ -14,7 +14,7 @@ import java.util.Map;
  * company：华强北在线
  * Date: 13-12-4 Time：上午10:30
  */
-public abstract class MultipartExportExcelAdapter<T> extends BaseExportExcelAdapter<T> {
+public abstract class MultipartExportExcelAdapter<T> extends BasicExportExcelAdapter<T> {
 
     /**
      * 生成Excel文件主体数据集合
