@@ -1,19 +1,15 @@
 package cn.lzb.common.excel.impl;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-
-import javax.servlet.http.HttpServletResponse;
-
 import cn.lzb.common.excel.ExportExcelAware;
 import cn.lzb.common.excel.ExportExcelContext;
-import cn.lzb.common.excel.factory.ExportExcelFactory;
 import cn.lzb.common.lang.ArrayUtil;
 import cn.lzb.common.lang.DateUtil;
 import cn.lzb.common.lang.StringUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 功能描述：导出生成Excel文件基本Adapter
@@ -25,13 +21,7 @@ import org.slf4j.LoggerFactory;
  * company：华强北在线
  * Date: 13-12-4 Time：上午11:05
  */
-public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> {
-
-    /**
-     * 打印cn.lzb.common.excel.impl.BasicExportExcelAdapter.java日志
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(BasicExportExcelAdapter.class);
-
+public abstract class BaseExportExcelAdapter<T> implements ExportExcelAware<T> {
 
     /**
      * 文件下载的header key
@@ -51,23 +41,23 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
     /**
      * 生成Excel文件上下文
      */
-    protected ExportExcelContext<T> exportExcelContext = new ExportExcelContext<T>();
+    protected ExportExcelContext<T> context = new ExportExcelContext<T>();
 
     /**
      * 创建Excel工厂
      */
-    protected final ExportExcelFactory exportExcelFactory;
+    protected final ExportExcelFactory factory;
 
     /**
      * 构造方法，初始化导出文件上线问
      */
-    public BasicExportExcelAdapter() {
+    public BaseExportExcelAdapter() {
         // 初始化上下文参数
-        init(exportExcelContext);
+        init(context);
         // 验证上下文参数
-        doValidContext(exportExcelContext);
+        doCheckContext(context);
         // 创建生产Excel文件工厂
-        exportExcelFactory = new ExportExcelFactory(exportExcelContext.getSheetName());
+        this.factory = getFactory();
     }
 
     /**
@@ -93,26 +83,26 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
      */
     protected void handleColTitle() {
         // 列头标长度
-        exportExcelFactory.setCols(getColumnSize());
+        factory.setCols(getColumnSize());
         // 表格标题
-        String title = exportExcelContext.getTitle();
+        String title = context.getTitle();
         if (StringUtil.isNotBlank(title)) {
             // 表格名称
             StringBuffer titleBuffer = new StringBuffer();
             titleBuffer.append(title).append("(导出时间：").append(DateUtil.formatDateTime()).append(")");
-            exportExcelFactory.createCaption(titleBuffer.toString());
+            factory.createCaption(titleBuffer.toString());
         }
         // 列
-        exportExcelFactory.createColCaption(exportExcelContext.getColTitles());
+        factory.createColCaption(context.getColTitles());
     }
 
     /**
      * 处理单元格的列宽度
      */
     protected void handleColumnWidth() {
-        int[] columnWidths = exportExcelContext.getColumnWidths();
+        int[] columnWidths = context.getColumnWidths();
         if (ArrayUtil.isNotEmpty(columnWidths)) {
-            exportExcelFactory.setColumnWidth(columnWidths);
+            factory.setColumnWidth(columnWidths);
         }
     }
 
@@ -120,9 +110,9 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
      * 处理备注信息
      */
     protected void handleRemark() {
-        String[] remarks = exportExcelContext.getRemarks();
+        String[] remarks = context.getRemarks();
         if (ArrayUtil.isNotEmpty(remarks)) {
-            exportExcelFactory.createRemarks(remarks);
+            factory.createRemarks(remarks);
         }
     }
 
@@ -132,7 +122,7 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
      * @return
      */
     protected int getColumnSize() {
-        return exportExcelContext.getColTitles()[0].length;
+        return context.getColTitles()[0].length;
     }
 
     /**
@@ -144,16 +134,16 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
         // 生成文件名称
         StringBuffer fileName = new StringBuffer();
         // 写文件
-        if (exportExcelContext.getHttpServletResponse() != null) {
+        if (context.getHttpServletResponse() != null) {
 
             try {
-                fileName.append(new String(exportExcelContext.getFileName().getBytes("GBK"), "ISO-8859-1"))
+                fileName.append(new String(context.getFileName().getBytes("GBK"), "ISO-8859-1"))
                         .append(FILE_EXTENSION);
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException("Encoding创建Excel文件名称异常, fileName=" + fileName, e);
             }
 
-            HttpServletResponse response = exportExcelContext.getHttpServletResponse();
+            HttpServletResponse response = context.getHttpServletResponse();
             response.reset();
 
             // 写入下载响应头信息
@@ -161,7 +151,8 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
             writeDownloadResHeader(fileName.toString(), response);
             try {
                 os = response.getOutputStream();
-                exportExcelFactory.createFile(response.getOutputStream());
+                factory.createFile(response.getOutputStream());
+                factory.dispose();
             } catch (IOException e) {
                 throw new RuntimeException("导出Excel业务， 生成Excel文件异常", e);
             } finally {
@@ -174,9 +165,8 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
             }
         } else {
             // 直接创建生成文件
-            fileName.append(exportExcelContext.getFilePath())
-                    .append(exportExcelContext.getFileName()).append(FILE_EXTENSION);
-            exportExcelFactory.createFile(fileName.toString());
+            fileName.append(context.getFilePath()).append(context.getFileName()).append(FILE_EXTENSION);
+            factory.createFile(fileName.toString());
         }
     }
 
@@ -185,17 +175,15 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
      *
      * @param exportContext`创建生成Excel文件上下文
      */
-    protected void doValidContext(ExportExcelContext<T> exportContext) {
+    protected void doCheckContext(ExportExcelContext<T> exportContext) {
         if (StringUtil.isBlank(exportContext.getFileName())) {
             throw new RuntimeException("生成Excel文件名称为空");
         }
         if (ArrayUtil.isEmpty(exportContext.getColTitles())) {
             throw new RuntimeException("生成Excel文件名称为空");
         }
-        if (exportContext.getHttpServletResponse() == null
-                && StringUtil.isBlank(exportExcelContext.getFilePath())) {
-            throw new RuntimeException(
-                    "HttpServletResponse与filePath不能同时为空，HttpServletResponse为空时filePath不能为空");
+        if (exportContext.getHttpServletResponse() == null && StringUtil.isBlank(context.getFilePath())) {
+            throw new RuntimeException("HttpServletResponse与filePath不能同时为空！");
         }
     }
 
@@ -212,22 +200,11 @@ public abstract class BasicExportExcelAdapter<T> implements ExportExcelAware<T> 
     }
 
     /**
-     * 打印系统时间
-     */
-    protected void printExecuteTime() {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(DateUtil.parseLongToDateString(System.currentTimeMillis()));
-        }
-    }
-
-    /**
-     * 打印系统时间
+     * 获取创建Excel工厂
      *
-     * @param info
+     * @return
      */
-    protected void printExecuteTime(String info) {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(info + DateUtil.parseLongToDateString(System.currentTimeMillis()));
-        }
+    protected ExportExcelFactory getFactory() {
+        return new ExportExcelFactory(context.getSheetName());
     }
 }

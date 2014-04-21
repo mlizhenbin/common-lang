@@ -1,6 +1,6 @@
 package cn.lzb.common.excel;
 
-import cn.lzb.common.excel.impl.BasicExportExcelAdapter;
+import cn.lzb.common.excel.impl.BaseExportExcelAdapter;
 import cn.lzb.common.excel.impl.DefaultExportExcelAdapter;
 import cn.lzb.common.excel.impl.MultipartExportExcelAdapter;
 
@@ -34,8 +34,8 @@ public interface ExportExcelFacade {
      * <p>MultipartExportExcelAdapter需要计算合并单元格，业务较为复杂，比较耗时</p>
      * <p>简单的生成Excel方式，无单元格合并，单行显示</p>
      *
-     * @param adapter	创建Excel文件抽象实现
-     * @param <T>		Excel文件对应对象
+     * @param adapter 创建Excel文件抽象实现
+     * @param <T>     Excel文件对应对象
      */
     public <T> void export(MultipartExportExcelAdapter<? super T> adapter);
 
@@ -47,6 +47,6 @@ public interface ExportExcelFacade {
      * @param adapter 创建Excel文件抽象实现
      * @param <T>     Excel文件对应对象
      */
-    public <T> void export(BasicExportExcelAdapter<? super T> adapter);
+    public <T> void export(BaseExportExcelAdapter<? super T> adapter);
 
 }

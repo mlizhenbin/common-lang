@@ -1,7 +1,5 @@
 package cn.lzb.common.excel;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +31,14 @@ public class ExportExcelContext<T> {
 
     /**
      * 列标题， 初始化上下文时，必填
+     * <p/>
      * 1、如果是一行列头标题，则可以通过如下代码实现：
      * String[][] colTitles = { { "列1", "列2", "列3" } }
-     * return colTitles;
+     * <p/>
      * 2、如果是二行列头标题，则可以通过如下代码实现：
      * String[][] colTitles = {
      * { "行1列1", "行1列2", null, "行1列4" },
      * { null, "行2列2", "行2列3", "行2列4" }};
-     * return colTitles;
      * 将显示的列标题实际效果为：
      * <table border="1">
      * <tr align="center">
@@ -165,10 +163,5 @@ public class ExportExcelContext<T> {
 
     public void setHttpServletResponse(HttpServletResponse httpServletResponse) {
         this.httpServletResponse = httpServletResponse;
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
     }
 }

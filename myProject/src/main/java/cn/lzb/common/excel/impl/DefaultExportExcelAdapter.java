@@ -1,11 +1,10 @@
 package cn.lzb.common.excel.impl;
 
+import cn.lzb.common.lang.CollectionUtil;
+import com.google.common.collect.Lists;
+
 import java.util.List;
 import java.util.Map;
-
-import cn.lzb.common.lang.CollectionUtil;
-
-import com.google.common.collect.Lists;
 
 /**
  * 功能描述：创建Excel抽象实现
@@ -15,7 +14,7 @@ import com.google.common.collect.Lists;
  * company：华强北在线
  * Date: 13-11-19 Time：下午12:44
  */
-public abstract class DefaultExportExcelAdapter<T> extends BasicExportExcelAdapter<T> {
+public abstract class DefaultExportExcelAdapter<T> extends BaseExportExcelAdapter<T> {
 
     /**
      * 生成Excel文件主体数据集合
@@ -27,7 +26,7 @@ public abstract class DefaultExportExcelAdapter<T> extends BasicExportExcelAdapt
      */
     public DefaultExportExcelAdapter() {
         // 处理导出数据
-        handleExportData(exportExcelContext.getExports(), excelData);
+        handleExportData(context.getExports(), excelData);
         // 创建
         create();
     }
@@ -59,11 +58,11 @@ public abstract class DefaultExportExcelAdapter<T> extends BasicExportExcelAdapt
     @Override
     public void handleBodyData() {
         super.handleBodyData();
-        Map<Integer, String> rowColors = exportExcelContext.getRowColors();
+        Map<Integer, String> rowColors = context.getRowColors();
         if (CollectionUtil.isEmpty(rowColors)) {
-            exportExcelFactory.createBody(excelData);
+            factory.createBody(excelData);
         } else {
-            exportExcelFactory.createBodyColor(excelData, rowColors);
+            factory.createBodyColor(excelData, rowColors);
         }
     }
 }

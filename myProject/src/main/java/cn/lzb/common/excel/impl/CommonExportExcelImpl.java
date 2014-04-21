@@ -21,6 +21,6 @@ public class CommonExportExcelImpl implements ExportExcelFacade {
     }
 
     @Override
-    public <T> void export(BasicExportExcelAdapter<? super T> adapter) {
+    public <T> void export(BaseExportExcelAdapter<? super T> adapter) {
     }
 }

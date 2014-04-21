@@ -1,9 +1,9 @@
 package cn.lzb.common.excel;
 
 import cn.lzb.common.excel.enity.SimpleEntity;
-import cn.lzb.common.excel.factory.ExportFrontColor;
 import cn.lzb.common.excel.impl.CommonExportExcelImpl;
 import cn.lzb.common.excel.impl.DefaultExportExcelAdapter;
+import cn.lzb.common.excel.impl.ExportFrontStyle;
 import cn.lzb.common.lang.CollectionUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -99,9 +99,9 @@ public class SimpleCreateTest {
                 int[] colWidths = {200, 200, 200, 200, 200, 200};
                 exportContext.setColumnWidths(colWidths);
                 Map<Integer, String> map = Maps.newHashMap();
-                map.put(0, ExportFrontColor.RED.getColorCode());
-                map.put(1, ExportFrontColor.GREEN.getColorCode());
-                map.put(2, ExportFrontColor.GREEN.getColorCode());
+                map.put(0, ExportFrontStyle.RED.getColorCode());
+                map.put(1, ExportFrontStyle.GREEN.getColorCode());
+                map.put(2, ExportFrontStyle.GREEN.getColorCode());
                 exportContext.setRowColors(map);
             }
         });

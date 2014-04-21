@@ -2,8 +2,8 @@ package cn.lzb.common.excel;
 
 import cn.lzb.common.excel.enity.MultipleEntity;
 import cn.lzb.common.excel.enity.Subject;
-import cn.lzb.common.excel.factory.ExportFrontColor;
 import cn.lzb.common.excel.impl.CommonExportExcelImpl;
+import cn.lzb.common.excel.impl.ExportFrontStyle;
 import cn.lzb.common.excel.impl.MultipartExportExcelAdapter;
 import cn.lzb.common.lang.CollectionUtil;
 import com.google.common.collect.Lists;
@@ -123,9 +123,9 @@ public class MultipleCreateTest {
                 exportContext.setColumnWidths(colWidths);
 
                 Map<Integer, String> map = Maps.newHashMap();
-                map.put(0, ExportFrontColor.RED.getColorCode());
-                map.put(1, ExportFrontColor.GREEN.getColorCode());
-                map.put(2, ExportFrontColor.RED.getColorCode());
+                map.put(0, ExportFrontStyle.RED.getColorCode());
+                map.put(1, ExportFrontStyle.GREEN.getColorCode());
+                map.put(2, ExportFrontStyle.RED.getColorCode());
                 exportContext.setRowColors(map);
             }
         });
