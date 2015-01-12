@@ -1,4 +1,4 @@
-package cn.lzb.common.excel;
+package cn.lzb.common.excel.export;
 
 /**
  * 功能描述： 创建Excel接口

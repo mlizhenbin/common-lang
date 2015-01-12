@@ -1,6 +1,6 @@
-package cn.lzb.common.excel.impl;
+package cn.lzb.common.excel.export.impl;
 
-import cn.lzb.common.excel.ExportExcelFacade;
+import cn.lzb.common.excel.export.ExportExcelFacade;
 
 /**
  * 功能描述： 基本的导出Excel文件实现类

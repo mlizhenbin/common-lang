@@ -1,4 +1,4 @@
-package cn.lzb.common.excel.impl;
+package cn.lzb.common.excel.export.impl;
 
 /**
  * 功能描述：生成Excel文件字体颜色，目前只支持红色与绿色

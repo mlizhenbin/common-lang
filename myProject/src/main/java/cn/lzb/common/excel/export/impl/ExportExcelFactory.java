@@ -1,4 +1,4 @@
-package cn.lzb.common.excel.impl;
+package cn.lzb.common.excel.export.impl;
 
 import cn.lzb.common.lang.ArrayUtil;
 import cn.lzb.common.lang.CollectionUtil;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 功能描述：创建生成Excel文件工厂
+ * 功能描述：生成Excel文件工厂
  *
  * @author: Zhenbin.Li
  * email： zhenbin.li@okhqb.com
