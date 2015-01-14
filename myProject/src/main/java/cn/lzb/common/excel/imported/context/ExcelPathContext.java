@@ -17,6 +17,11 @@ public class ExcelPathContext<T> extends ExcelCommonContext<T> {
      */
     private String excelFilePath;
 
+    public ExcelPathContext(Class<T> clazz, String excelFilePath) {
+        super(clazz);
+        this.excelFilePath = excelFilePath;
+    }
+
     public String getExcelFilePath() {
         return excelFilePath;
     }

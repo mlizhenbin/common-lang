@@ -27,6 +27,11 @@ public class ExcelInputStreamContext<T> extends ExcelCommonContext<T> {
         this.inputStream = inputStream;
     }
 
+    public ExcelInputStreamContext(Class<T> clazz, InputStream inputStream) {
+        super(clazz);
+        this.inputStream = inputStream;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

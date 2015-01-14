@@ -18,9 +18,7 @@ import java.util.List;
 public class ImportTest {
 
     public static void main(String[] args) {
-        ExcelPathContext test = new ExcelPathContext();
-        test.setExcelFilePath("e://test.xlsx");
-        test.setClazz(TestEntity.class);
+        ExcelPathContext test = new ExcelPathContext(TestEntity.class, "e://test.xlsx");
         ImportedExcelFacade importedExcelFacade = new DefaultImportedExcelImpl();
         List<TestEntity> read = importedExcelFacade.read(test);
         System.out.println(read);

@@ -27,6 +27,10 @@ public class ExcelCommonContext<T> {
      */
     private Class<T> clazz;
 
+    public ExcelCommonContext(Class<T> clazz) {
+        this.clazz = clazz;
+    }
+
     public Integer getStartRow() {
         return startRow;
     }
