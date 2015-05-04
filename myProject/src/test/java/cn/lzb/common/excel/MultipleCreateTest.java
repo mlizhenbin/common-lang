@@ -50,7 +50,7 @@ public class MultipleCreateTest {
     private List<MultipleEntity> getMultipleEntities() {
 
         List<MultipleEntity> multipleEntities = Lists.newArrayList();
-        for (int i = 1; i < 7000; i++) {
+        for (int i = 1; i < 10; i++) {
             MultipleEntity multipleEntity = new MultipleEntity();
             multipleEntity.setUserId(i);
             multipleEntity.setUserName("okhqb_" + i);
@@ -118,7 +118,7 @@ public class MultipleCreateTest {
                 String[][] colTitles = {{"学号", "姓名", "地址", "手机号码", "课程编号", "课程名称", "综合评分", "分数", "备注"}};
                 exportContext.setColTitles(colTitles);
                 exportContext.setFileName("测试创建生成Excel合并单元格表格");
-                exportContext.setFilePath("E:\\");
+                exportContext.setFilePath("/Users/lizhenbin/");
                 exportContext.setSheetName("表格2");
                 exportContext.setTitle("测试合并列表格");
                 int[] colWidths = {100, 100, 100, 100, 100, 100, 100, 100, 100};

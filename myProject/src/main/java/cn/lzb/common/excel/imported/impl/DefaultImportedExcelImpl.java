@@ -32,7 +32,7 @@ public class DefaultImportedExcelImpl implements ImportedExcelFacade {
         }
 
         Workbook streamWorkbook = ImportedExcelUtils.getStreamWorkbook(context.getInputStream());
-        ExcelCommonContext commonContext = new ExcelCommonContext();
+        ExcelCommonContext commonContext = new ExcelCommonContext(context.getClazz());
         commonContext.setSheetName(context.getSheetName());
         commonContext.setStartRow(context.getStartRow());
         return getFactory(commonContext, streamWorkbook).resolve(context.getClazz());
@@ -51,7 +51,7 @@ public class DefaultImportedExcelImpl implements ImportedExcelFacade {
         }
 
         Workbook pathWorkbook = ImportedExcelUtils.getPathWorkbook(context.getExcelFilePath());
-        ExcelCommonContext commonContext = new ExcelCommonContext();
+        ExcelCommonContext commonContext = new ExcelCommonContext(context.getClazz());
         commonContext.setSheetName(context.getSheetName());
         commonContext.setStartRow(context.getStartRow());
         return getFactory(commonContext, pathWorkbook).resolve(context.getClazz());
