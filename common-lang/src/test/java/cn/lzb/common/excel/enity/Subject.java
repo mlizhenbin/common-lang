@@ -1,5 +1,8 @@
 package cn.lzb.common.excel.enity;
 
+import cn.lzb.common.common.NoNullStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.math.BigDecimal;
 
 /**
@@ -38,5 +41,10 @@ public class Subject {
 
     public void setScore(BigDecimal score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, new NoNullStyle());
     }
 }
