@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hqb360</groupId>
-    <artifactId>mayProjects</artifactId>
+    <artifactId>common-lang</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
