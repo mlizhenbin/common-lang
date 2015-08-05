@@ -189,7 +189,7 @@ public class ListFieldConvertUtils {
     @SuppressWarnings("unchecked")
     public static <T, E> Map<T, E> getObjectMap(List<E> objects, String fieldName) {
         Map<T, E> map = Maps.newLinkedHashMap();
-        if (CollectionUtil.isEmpty(objects)) {
+        if (CollectionUtil.isEmpty(objects) || StringUtil.isBlank(fieldName)) {
             return map;
         }
 
