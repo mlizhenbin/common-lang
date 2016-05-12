@@ -34,7 +34,7 @@ import com.google.common.collect.Sets;
  * Object[] inStorageArray = ListFieldConvertUtils.getFieldElementArray(transferOutDTOList, "inStorage");
  *
  * @author: Zhenbin.Li
- * email： lizhenbin@oneplus.cn
+ * email： lizhenbin08@sina.com
  * company：一加科技
  * Date: 15-07-03 Time：下午12:29
  */

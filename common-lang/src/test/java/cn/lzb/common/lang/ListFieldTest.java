@@ -10,7 +10,7 @@ import java.util.Map;
  * 功能描述：自动化生成代码启动入口
  *
  * @author: Zhenbin.Li
- * email： lizhenbin@oneplus.cn
+ * email： lizhenbin08@sina.com
  * company：一加科技
  * Date: 15/8/5 Time: 15:33
  */

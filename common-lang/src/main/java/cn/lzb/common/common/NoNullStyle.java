@@ -11,7 +11,7 @@ import java.io.Serializable;
  * “” 打印
  *
  * @author: Zhenbin.Li
- * email： lizhenbin@oneplus.cn
+ * email： lizhenbin08@sina.com
  * company：一加科技
  * Date: 15/8/5 Time: 11:21
  */
